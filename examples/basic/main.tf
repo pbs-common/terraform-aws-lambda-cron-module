@@ -1,12 +1,13 @@
 module "lambda_cron" {
   source = "../.."
 
-  handler  = "main"
+  handler  = "bootstrap"
   filename = "../artifacts/handler.zip"
-  runtime  = "go1.x"
+  runtime  = "provided.al2023"
 
   environment  = var.environment
   product      = var.product
   repo         = var.repo
+  owner        = var.owner
   organization = var.organization
 }

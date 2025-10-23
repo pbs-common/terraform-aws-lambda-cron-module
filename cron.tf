@@ -2,7 +2,7 @@ resource "aws_cloudwatch_event_rule" "event_rule" {
   name                = local.event_rule_name
   description         = local.event_rule_description
   schedule_expression = "cron(${var.cron})"
-  is_enabled          = var.is_enabled
+  state               = var.is_enabled ? "ENABLED" : "DISABLED"
 
   tags = local.tags
 }

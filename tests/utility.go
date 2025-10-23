@@ -2,19 +2,24 @@ package test
 
 import (
 	"testing"
+	"context"
 
-	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/sts"
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/sts"
 )
 
 func getAWSAccountID(t *testing.T) string {
-	session, err := session.NewSession()
+	ctx := context.Background()
+
+	// Load AWS config
+	cfg, err := config.LoadDefaultConfig(ctx, config.WithRegion("us-east-1"))
 	if err != nil {
-		t.Fatalf("Failed to create AWS session: %v", err)
-		return ""
+		panic(err)
 	}
-	svc := sts.New(session)
-	result, err := svc.GetCallerIdentity(&sts.GetCallerIdentityInput{})
+
+	// Get AWS account ID
+	stsClient := sts.NewFromConfig(cfg)
+	result, err := stsClient.GetCallerIdentity(ctx, &sts.GetCallerIdentityInput{})
 	if err != nil {
 		t.Fatalf("Failed to get AWS Account ID: %v", err)
 		return ""
@@ -23,10 +28,10 @@ func getAWSAccountID(t *testing.T) string {
 }
 
 func getAWSRegion(t *testing.T) string {
-	session, err := session.NewSession()
+    ctx := context.Background()
+	cfg, err := config.LoadDefaultConfig(ctx)
 	if err != nil {
-		t.Fatalf("Failed to create AWS session: %v", err)
 		return ""
 	}
-	return *session.Config.Region
+	return cfg.Region
 }

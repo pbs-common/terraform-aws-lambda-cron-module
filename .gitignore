@@ -1,6 +1,4 @@
 .terraform
-examples/artifacts/*
-!examples/artifacts/.gitignore
 .DS_Store
 target
 CHANGELOG.md

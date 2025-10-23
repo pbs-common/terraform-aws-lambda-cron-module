@@ -1,14 +1,15 @@
 module "lambda_cron" {
   source = "../.."
 
-  handler  = "main"
-  filename = "../artifacts/arm-handler.zip"
-  runtime  = "go1.x"
+  handler  = "bootstrap"
+  filename = "../artifacts/handler.zip"
+  runtime  = "provided.al2023"
 
   architectures = ["arm64"]
 
   environment  = var.environment
   product      = var.product
   repo         = var.repo
+  owner        = var.owner
   organization = var.organization
 }

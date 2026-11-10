@@ -1,5 +1,5 @@
 module "lambda" {
-  source = "github.com/pbs/terraform-aws-lambda-module?ref=2.0.1"
+  source = "github.com/pbs/terraform-aws-lambda-module?ref=3.0.0"
 
   # Required
   handler  = var.handler
@@ -27,17 +27,13 @@ module "lambda" {
   security_group_id        = var.security_group_id
   subnets                  = var.subnets
 
-  lambda_insights_extension_version               = var.lambda_insights_extension_version
-  lambda_insights_extension_account_number        = var.lambda_insights_extension_account_number
-  parameters_and_secrets_extension_version        = var.parameters_and_secrets_extension_version
-  parameters_and_secrets_extension_account_number = var.parameters_and_secrets_extension_account_number
-  app_config_extension_version                    = var.app_config_extension_version
-  app_config_extension_account_number             = var.app_config_extension_account_number
-  ssm_path                                        = var.ssm_path
-  add_ssm_extension_layer                         = var.add_ssm_extension_layer
-  add_app_config_extension_layer                  = var.add_app_config_extension_layer
-  allow_app_config_access                         = var.allow_app_config_access
-  package_type                                    = var.package_type
+  lambda_insights_extension_version        = var.lambda_insights_extension_version
+  lambda_insights_extension_account_number = var.lambda_insights_extension_account_number
+  ssm_path                                 = var.ssm_path
+  add_ssm_extension_layer                  = var.add_ssm_extension_layer
+  add_app_config_extension_layer           = var.add_app_config_extension_layer
+  allow_app_config_access                  = var.allow_app_config_access
+  package_type                             = var.package_type
 
   # Tags
   environment  = var.environment
